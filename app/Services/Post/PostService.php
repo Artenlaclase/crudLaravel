@@ -14,8 +14,18 @@ class PostService
         return $query->paginate(Post::PAGINATE);
     }
 
+    public function find(int $id): Post 
+    {
+        return Post::findOrFail($id);
+    }
+
     public function create(array $data): Post
     {
         return Post::create($data);
+    }
+
+    public function update(int $id, array $data): bool
+     {
+        return Post::where('id', $id)->update($data);
     }
 }

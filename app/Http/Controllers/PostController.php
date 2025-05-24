@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Post\CreatePostRequest;
+use App\Http\Requests\Post\UpdatePostRequest;
 use App\Services\Post\PostService;
 use App\Models\Post;
 
@@ -39,14 +40,18 @@ class PostController extends Controller
         //
     }
 
-    public function edit(string $id)
+    public function edit(int $id)
     {
-        //
+        $post = $this->service->find($id);
+
+        return view('posts.form', compact('post'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdatePostRequest $request, int $id)
     {
-        //
+        $this->service->update($id, $request->validated());
+
+        return redirect()->route('posts.index')->with('Post Actualizado exitosamente! ');
     }
 
     public function destroy(string $id)
