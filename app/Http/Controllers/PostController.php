@@ -51,11 +51,12 @@ class PostController extends Controller
     {
         $this->service->update($id, $request->validated());
 
-        return redirect()->route('posts.index')->with('Post Actualizado exitosamente! ');
+        return redirect()->route('posts.index')->with('message', 'Post Actualizado exitosamente! ');
     }
 
     public function destroy(string $id)
     {
-        //
-    }
+        $this->service->delete($id);
+
+        return redirect()->route('posts.index')->with('message', 'Post Eliminado exitosamente! ');    }
 }

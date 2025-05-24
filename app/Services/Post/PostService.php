@@ -28,4 +28,9 @@ class PostService
      {
         return Post::where('id', $id)->update($data);
     }
+
+    public function delete(int $id): bool
+    {
+        return Post::where('id', $id)->delete();
+    }
 }
