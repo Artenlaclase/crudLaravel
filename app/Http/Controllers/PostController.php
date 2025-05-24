@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\Post\CreatePostRequest;
 use App\Services\Post\PostService;
+use App\Models\Post;
+
 
 class PostController extends Controller
 {
@@ -22,7 +24,7 @@ class PostController extends Controller
 
     public function create()
     {
-        //
+        return view('posts.form', [ 'post'=> new Post() ]);
     }
 
     public function store(CreatePostRequest $request)
