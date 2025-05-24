@@ -15,7 +15,9 @@ class PostController extends Controller
     }
     public function index()
     {
-        //
+        $posts = $this->service->getAll();
+
+        return view('posts.index', compact('posts'));
     }
 
     public function create()
