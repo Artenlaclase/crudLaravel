@@ -41,6 +41,7 @@ class PostController extends Controller
         return view('posts.show', compact('post'));
     }
 
+
     public function edit(int $id)
     {
         $post = $this->service->find($id);
