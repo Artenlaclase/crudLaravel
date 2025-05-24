@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 
@@ -12,20 +13,18 @@ use App\Models\Post;
 class PostController extends Controller
 {
 
-    public function __construct(protected PostService $service)
-    {
-        
-    }
+    public function __construct(protected PostService $service) {}
     public function index()
     {
+        $mainPost = Post::latest()->first(); // o con is_featured si lo usas
         $posts = $this->service->getAll();
 
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('mainPost', 'posts'));
     }
 
     public function create()
     {
-        return view('posts.form', [ 'post'=> new Post() ]);
+        return view('posts.form', ['post' => new Post()]);
     }
 
     public function store(CreatePostRequest $request)
@@ -37,7 +36,9 @@ class PostController extends Controller
 
     public function show(string $id)
     {
-        //
+        $post = $this->service->find($id);
+
+        return view('posts.show', compact('post'));
     }
 
     public function edit(int $id)
@@ -58,5 +59,6 @@ class PostController extends Controller
     {
         $this->service->delete($id);
 
-        return redirect()->route('posts.index')->with('message', 'Post Eliminado exitosamente! ');    }
+        return redirect()->route('posts.index')->with('message', 'Post Eliminado exitosamente! ');
+    }
 }

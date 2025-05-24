@@ -1,16 +1,21 @@
 <x-layout>
     <div class="row m-4">
-        <div class="col-12">
-            @if(session('message'))
-                <div class="alert alert-secondary my-2"> 
-                    {{ session('message') }}
+
+        {{-- POST PRINCIPAL DESTACADO --}}
+        @if($mainPost)
+            <div class="col-12 mb-4">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ $mainPost->title }}</h2>
+                        <p class="card-text">{{ Str::limit($mainPost->content, 200) }}</p>
+                        <a href="{{ route('posts.show', $mainPost) }}" class="btn btn-primary">Leer más</a>
+                    </div>
                 </div>
-            @endif
+            </div>
+        @endif
 
-            <a href="{{ route('posts.create') }}" class="btn btn-primary my-2">Crear nuevo post</a>
-        </div>
-
-        <div class="col-12 mt-4">
+        {{-- LISTA DE POSTS RESTANTES --}}
+        <div class="col-12">
             <ul class="list-group">
                 @foreach($posts as $post)
                     <li class="list-group-item d-flex justify-content-between align-items-center">
