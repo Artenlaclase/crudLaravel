@@ -17,7 +17,7 @@
                         <div>
                             <strong>{{ $post->title }}</strong> ({{ $post->status }})
                         </div>
-                        <div class="btn-group">
+                        <div class="d-flex gap-2">
                             <a href="{{ route('posts.edit', $post) }}" class="btn btn-warning btn-sm">Editar</a>
                             <form method="POST" action="{{ route('posts.destroy', $post) }}" style="display:inline;">
                                 @csrf
